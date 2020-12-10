@@ -36,7 +36,7 @@ function MyPosts(props: MyPostsPropsType) {
             </div>
             <div className={mp.posts}>
                 {postsElements}
-
+            dsadsd
             </div>
 
         </div>
