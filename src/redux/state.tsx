@@ -1,4 +1,3 @@
-import React from "react";
 import {v1} from "uuid";
 import {rerenderEntireTree} from "../render";
 
@@ -17,6 +16,7 @@ export type MessagesDataType = {
     message: string
 }
 export type ProfilePageType = {
+    messageForNewPost: string
     postData: Array<PostDataType>
 }
 export type DialogsPageType = {
@@ -32,6 +32,7 @@ export type StateType = {
 
 let state: StateType = {
     profilePage: {
+        messageForNewPost: "",
         postData: [
             {id: v1(), message: "Hello, it's me", likesCount: 10, author: "Alex"},
             {id: v1(), message: "I was wondering if after all these years you'd like to meet", likesCount: 15, author: "Alex"},
@@ -52,6 +53,10 @@ let state: StateType = {
             {id: v1(), name: "Michael"}
         ]
     }
+}
+export let changeTextArea = (newText: string) => {
+    state.profilePage.messageForNewPost = newText
+    rerenderEntireTree(state)
 }
 
 export let addPost = (postMessage: string) => {
