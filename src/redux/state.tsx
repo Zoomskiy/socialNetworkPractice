@@ -59,14 +59,15 @@ export let changeTextArea = (newText: string) => {
     rerenderEntireTree(state)
 }
 
-export let addPost = (postMessage: string) => {
+export let addPost = () => {
     let newPost: PostDataType = {
         id: v1(),
-        message: postMessage,
+        message: state.profilePage.messageForNewPost,
         likesCount: 0,
         author: "Bob"
     }
     state.profilePage.postData.push(newPost)
+    state.profilePage.messageForNewPost = ""
     rerenderEntireTree(state)
 }
 
