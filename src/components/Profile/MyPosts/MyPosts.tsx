@@ -15,9 +15,10 @@ function MyPosts(props: MyPostsPropsType) {
     const addPost = () => {
         if(newPostElement.current) {
             props.addPost(newPostElement.current.value)
+            newPostElement.current.value = ""
         }
 
-        newPostElement.current.value = ""
+
     }
 
 
@@ -36,7 +37,6 @@ function MyPosts(props: MyPostsPropsType) {
             </div>
             <div className={mp.posts}>
                 {postsElements}
-            dsadsd
             </div>
 
         </div>
