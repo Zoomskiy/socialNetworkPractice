@@ -1,5 +1,8 @@
 import {v1} from "uuid";
-import {rerenderEntireTree} from "../render";
+
+let renderTree = () => {
+
+}
 
 export type PostDataType = {
     id: string
@@ -28,8 +31,6 @@ export type StateType = {
     dialogsProfile:DialogsPageType
 }
 
-
-
 let state: StateType = {
     profilePage: {
         messageForNewPost: "",
@@ -56,7 +57,7 @@ let state: StateType = {
 }
 export let changeTextArea = (newText: string) => {
     state.profilePage.messageForNewPost = newText
-    rerenderEntireTree(state)
+    renderTree()
 }
 
 export let addPost = () => {
@@ -68,8 +69,11 @@ export let addPost = () => {
     }
     state.profilePage.postData.push(newPost)
     state.profilePage.messageForNewPost = ""
-    rerenderEntireTree(state)
+    renderTree()
 }
 
+export const subscribe = (observer: () => void) => {
+    renderTree = observer;
+}
 
 export default state
