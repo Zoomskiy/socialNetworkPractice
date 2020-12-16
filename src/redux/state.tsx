@@ -1,9 +1,5 @@
 import {v1} from "uuid";
 
-let renderTree = () => {
-
-}
-
 export type PostDataType = {
     id: string
     message: string
@@ -30,50 +26,65 @@ export type StateType = {
     profilePage: ProfilePageType
     dialogsProfile:DialogsPageType
 }
+export type StoreType = {
+    _state: StateType
+    getState: () => StateType
+    _callSubscriber: () => void
+    addPost: () => void
+    changeTextArea: (newText: string) => void
+    subscribe: (observer: () => void) => void
+}
 
-let state: StateType = {
-    profilePage: {
-        messageForNewPost: "",
-        postData: [
-            {id: v1(), message: "Hello, it's me", likesCount: 10, author: "Alex"},
-            {id: v1(), message: "I was wondering if after all these years you'd like to meet", likesCount: 15, author: "Alex"},
-            {id: v1(), message: "To go over everything", likesCount: 3, author: "Alex"},
-            {id: v1(), message: "They say that time's supposed to heal ya", likesCount: 150, author: "Alex"},
-            {id: v1(), message: "But I ain't done much healing", likesCount: 2000, author: "Alex"},
-        ]
+let store: StoreType = {
+    _state: {
+        profilePage: {
+            messageForNewPost: "",
+            postData: [
+                {id: v1(), message: "Hello, it's me", likesCount: 10, author: "Alex"},
+                {id: v1(), message: "I was wondering if after all these years you'd like to meet", likesCount: 15, author: "Alex"},
+                {id: v1(), message: "To go over everything", likesCount: 3, author: "Alex"},
+                {id: v1(), message: "They say that time's supposed to heal ya", likesCount: 150, author: "Alex"},
+                {id: v1(), message: "But I ain't done much healing", likesCount: 2000, author: "Alex"},
+            ]
+        },
+        dialogsProfile: {
+            messagesData: [
+                {id: v1(), message: "Hello"},
+                {id: v1(), message: "Hi"},
+                {id: v1(), message: "Privet"}
+            ],
+            dialogsData: [
+                {id: v1(), name: "Alex"},
+                {id: v1(), name: "Dimitry"},
+                {id: v1(), name: "Michael"}
+            ]
+        }
     },
-    dialogsProfile: {
-        messagesData: [
-            {id: v1(), message: "Hello"},
-            {id: v1(), message: "Hi"},
-            {id: v1(), message: "Privet"}
-        ],
-        dialogsData: [
-            {id: v1(), name: "Alex"},
-            {id: v1(), name: "Dimitry"},
-            {id: v1(), name: "Michael"}
-        ]
+    getState() {
+        return this._state
+    },
+    _callSubscriber()  {
+
+    },
+    addPost (){
+        let newPost: PostDataType = {
+            id: v1(),
+            message: this._state.profilePage.messageForNewPost,
+            likesCount: 0,
+            author: "Bob"
+        }
+        this._state.profilePage.postData.push(newPost)
+        this._state.profilePage.messageForNewPost = ""
+        this._callSubscriber()
+    },
+    changeTextArea (newText: string) {
+        this._state.profilePage.messageForNewPost = newText
+        this._callSubscriber()
+    },
+    subscribe(observer) {
+        this._callSubscriber = observer;
     }
 }
-export let changeTextArea = (newText: string) => {
-    state.profilePage.messageForNewPost = newText
-    renderTree()
-}
 
-export let addPost = () => {
-    let newPost: PostDataType = {
-        id: v1(),
-        message: state.profilePage.messageForNewPost,
-        likesCount: 0,
-        author: "Bob"
-    }
-    state.profilePage.postData.push(newPost)
-    state.profilePage.messageForNewPost = ""
-    renderTree()
-}
 
-export const subscribe = (observer: () => void) => {
-    renderTree = observer;
-}
-
-export default state
+export default store
