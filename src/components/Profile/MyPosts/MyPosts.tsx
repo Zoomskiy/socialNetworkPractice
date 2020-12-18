@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import mp from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {ActionsTypes, PostDataType} from "../../../redux/state";
+import {ActionsTypes, AddPostAC, PostDataType, UpdateNewPostTextAC} from "../../../redux/state";
 
 type MyPostsPropsType = {
     message: string
@@ -9,16 +9,18 @@ type MyPostsPropsType = {
     dispatch: (action: ActionsTypes) => void
 }
 
+
+
 function MyPosts(props: MyPostsPropsType) {
     let postsElements = props.postData.map(post => <Post message={post.message} likeCount={post.likesCount}
                                                          author={post.author} id={post.id}/>)
 
     const addPost = () => {
-        props.dispatch( {type:"ADD-POST" })
+        props.dispatch( AddPostAC())
     }
 
     const changeTextAreaHandler = (e : ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: e.currentTarget.value})
+        props.dispatch(UpdateNewPostTextAC(e.currentTarget.value))
     }
 
     return (

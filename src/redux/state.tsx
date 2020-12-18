@@ -24,7 +24,7 @@ export type DialogsPageType = {
 }
 export type StateType = {
     profilePage: ProfilePageType
-    dialogsProfile:DialogsPageType
+    dialogsProfile: DialogsPageType
 }
 export type StoreType = {
     _state: StateType
@@ -33,15 +33,20 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionsTypes) => void
 }
-type AddPostType = {
-    type: "ADD-POST"
+
+export type ActionsTypes = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdateNewPostTextAC>
+
+export const AddPostAC = () => {
+    return {
+        type: "ADD-POST"
+    } as const
 }
-type UpdateNewPostTextType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
+export const UpdateNewPostTextAC = (newText: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT", newText: newText
+    } as const
+
 }
-export type ActionsTypes = AddPostType
-    | UpdateNewPostTextType
 
 let store: StoreType = {
     _state: {
@@ -49,7 +54,12 @@ let store: StoreType = {
             messageForNewPost: "",
             postData: [
                 {id: v1(), message: "Hello, it's me", likesCount: 10, author: "Alex"},
-                {id: v1(), message: "I was wondering if after all these years you'd like to meet", likesCount: 15, author: "Alex"},
+                {
+                    id: v1(),
+                    message: "I was wondering if after all these years you'd like to meet",
+                    likesCount: 15,
+                    author: "Alex"
+                },
                 {id: v1(), message: "To go over everything", likesCount: 3, author: "Alex"},
                 {id: v1(), message: "They say that time's supposed to heal ya", likesCount: 150, author: "Alex"},
                 {id: v1(), message: "But I ain't done much healing", likesCount: 2000, author: "Alex"},
@@ -68,7 +78,7 @@ let store: StoreType = {
             ]
         }
     },
-    _callSubscriber()  {
+    _callSubscriber() {
 
     },
     getState() {
@@ -78,7 +88,7 @@ let store: StoreType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if(action.type === "ADD-POST") {
+        if (action.type === "ADD-POST") {
             let newPost: PostDataType = {
                 id: v1(),
                 message: this._state.profilePage.messageForNewPost,
@@ -88,7 +98,7 @@ let store: StoreType = {
             this._state.profilePage.postData.push(newPost)
             this._state.profilePage.messageForNewPost = ""
             this._callSubscriber()
-        } else if (action.type === "UPDATE-NEW-POST-TEXT"){
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.messageForNewPost = action.newText
             this._callSubscriber()
         }
