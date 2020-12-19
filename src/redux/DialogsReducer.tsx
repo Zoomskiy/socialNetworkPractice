@@ -1,11 +1,15 @@
 import {v1} from "uuid";
+import {DialogsPageType} from "./state";
 
 
-export const DialogsReducer = (state:any, action:any) => {
+export const DialogsReducer = (state: DialogsPageType, action: {type: string, body?: string}) => {
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
-            state.newMessageBody = action.body
+            if(action.body){
+                state.newMessageBody = action.body
+
+            }
             return state
         case "SEND-MESSAGE":
             let body = state.newMessageBody

@@ -1,7 +1,7 @@
 import {v1} from "uuid";
-import {PostDataType} from "./state";
+import {PostDataType, ProfilePageType} from "./state";
 
-export const ProfileReducer = (state: any, action: any) => {
+export const ProfileReducer = (state: ProfilePageType, action: any) => {
 
     switch (action.type) {
         case "ADD-POST" :
