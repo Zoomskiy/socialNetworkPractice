@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from "react";
 import mp from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {ActionsTypes, AddPostAC, PostDataType, UpdateNewPostTextAC} from "../../../redux/state";
+import {ActionsTypes, PostDataType } from "../../../redux/state";
+import {AddPostAC, UpdateNewPostTextAC} from "../../../redux/ProfileReducer";
 
 type MyPostsPropsType = {
     message: string

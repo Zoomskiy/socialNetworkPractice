@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {DialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./DialogsReducer";
+import {AddPostAC, ProfileReducer, UpdateNewPostTextAC} from './ProfileReducer';
 
 export type PostDataType = {
     id: string
@@ -37,29 +39,6 @@ export type StoreType = {
 
 export type ActionsTypes = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdateNewPostTextAC> | ReturnType<typeof SendMessageAC> | ReturnType<typeof UpdateNewMessageBodyAC>
 
-export const AddPostAC = () => {
-    return {
-        type: "ADD-POST"
-    } as const
-}
-export const UpdateNewPostTextAC = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT", newText: newText
-    } as const
-
-}
-export const SendMessageAC = () => {
-    return {
-        type: "SEND-MESSAGE"
-    } as const
-}
-export const UpdateNewMessageBodyAC = (text: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY", body: text
-    } as const
-
-}
-
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -92,7 +71,6 @@ let store: StoreType = {
         }
     },
     _callSubscriber() {
-
     },
     getState() {
         return this._state
@@ -101,28 +79,9 @@ let store: StoreType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            let newPost: PostDataType = {
-                id: v1(),
-                message: this._state.profilePage.messageForNewPost,
-                likesCount: 0,
-                author: "Bob"
-            }
-            this._state.profilePage.postData.push(newPost)
-            this._state.profilePage.messageForNewPost = ""
-            this._callSubscriber()
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.messageForNewPost = action.newText
-            this._callSubscriber()
-        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY"){
-            this._state.dialogsProfile.newMessageBody = action.body
-            this._callSubscriber()
-        }else if (action.type === "SEND-MESSAGE"){
-            let body = this._state.dialogsProfile.newMessageBody
-            this._state.dialogsProfile.newMessageBody = ""
-            this._state.dialogsProfile.messagesData.push({id: v1(), message:body})
-            this._callSubscriber()
-        }
+       this._state.profilePage = ProfileReducer(this._state.profilePage, action)
+       this._state.dialogsProfile = DialogsReducer(this._state.dialogsProfile, action)
+       this._callSubscriber()
     }
 }
 
