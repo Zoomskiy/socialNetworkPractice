@@ -7,8 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 
-let rerenderEntireTree = (state: any) => {
-debugger
+let rerenderEntireTree =(state?: any) => {
     ReactDOM.render(
         <BrowserRouter>
             <App  dispatch={store.dispatch.bind(store)} appState={store.getState()}/>
@@ -17,10 +16,6 @@ debugger
 
 rerenderEntireTree(store.getState())
 
-store.subscribe(() => {
-    let state = store.getState()
-    rerenderEntireTree(state)
-    }
-)
+store.subscribe(rerenderEntireTree)
 
 reportWebVitals();

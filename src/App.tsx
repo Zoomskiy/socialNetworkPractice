@@ -11,7 +11,7 @@ import Settings from "./components/Settings/Settings";
 import {ActionsTypes, StateType} from "./redux/state";
 
 type AppPropsType = {
-    appState: any
+    appState: StateType
     dispatch: (action: ActionsTypes) => void
 
 }

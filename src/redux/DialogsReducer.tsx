@@ -16,7 +16,7 @@ let initialState: DialogsPageType = {
 }
 
 
-export const DialogsReducer = (state: DialogsPageType = initialState, action: { type: string, body?: string }) => {
+export const DialogsReducer = (state = initialState, action: { type: string, body?: string }) => {
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":

@@ -4,8 +4,8 @@ import {ProfileReducer} from "./ProfileReducer";
 
 
 let reducers = combineReducers({
-    ProfilePage: ProfileReducer,
-    DialogsPage: DialogsReducer
+    profilePage: ProfileReducer,
+    dialogsProfile: DialogsReducer
     }
 )
 
