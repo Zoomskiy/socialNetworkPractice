@@ -1,7 +1,23 @@
 import {v1} from "uuid";
 import {PostDataType, ProfilePageType} from "./state";
 
-export const ProfileReducer = (state: ProfilePageType, action: any) => {
+const initialState: ProfilePageType =  {
+        messageForNewPost: "",
+        postData: [
+            {id: v1(), message: "Hello, it's me", likesCount: 10, author: "Alex"},
+            {
+                id: v1(),
+                message: "I was wondering if after all these years you'd like to meet",
+                likesCount: 15,
+                author: "Alex"
+            },
+            {id: v1(), message: "To go over everything", likesCount: 3, author: "Alex"},
+            {id: v1(), message: "They say that time's supposed to heal ya", likesCount: 150, author: "Alex"},
+            {id: v1(), message: "But I ain't done much healing", likesCount: 2000, author: "Alex"},
+        ]
+    }
+
+export const ProfileReducer = (state:  ProfilePageType = initialState, action: any) => {
 
     switch (action.type) {
         case "ADD-POST" :

@@ -11,21 +11,25 @@ import Settings from "./components/Settings/Settings";
 import {ActionsTypes, StateType} from "./redux/state";
 
 type AppPropsType = {
-    appState: StateType
+    appState: any
     dispatch: (action: ActionsTypes) => void
+
 }
 
 function App(props: AppPropsType) {
 
 
     return (
+
         <div className='app-wrapper'>
+
 
                 <Header/>
                 <Navigation/>
                 {/*<Profile/>*/}
 
                 <div className="app-wrapper-content">
+
                     <Route path={"/Profile"} render={() => <Profile dispatch={props.dispatch} state={props.appState.profilePage}/>}/>
                     <Route path={"/Dialogs"} render={() => <Dialogs dispatch={props.dispatch} state={props.appState.dialogsProfile}/>}/>
                     <Route path={"/News"} render={() => <News/>}/>

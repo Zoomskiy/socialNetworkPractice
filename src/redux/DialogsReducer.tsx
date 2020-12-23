@@ -1,12 +1,26 @@
 import {v1} from "uuid";
 import {DialogsPageType} from "./state";
 
+let initialState: DialogsPageType = {
+    messagesData: [
+        {id: v1(), message: "Hello"},
+        {id: v1(), message: "Hi"},
+        {id: v1(), message: "Privet"}
+    ],
+    dialogsData: [
+        {id: v1(), name: "Alex"},
+        {id: v1(), name: "Dimitry"},
+        {id: v1(), name: "Michael"}
+    ],
+    newMessageBody: ""
+}
 
-export const DialogsReducer = (state: DialogsPageType, action: {type: string, body?: string}) => {
+
+export const DialogsReducer = (state: DialogsPageType = initialState, action: { type: string, body?: string }) => {
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
-            if(action.body){
+            if (action.body) {
                 state.newMessageBody = action.body
 
             }
@@ -14,9 +28,10 @@ export const DialogsReducer = (state: DialogsPageType, action: {type: string, bo
         case "SEND-MESSAGE":
             let body = state.newMessageBody
             state.newMessageBody = ""
-            state.messagesData.push({id: v1(), message:body})
+            state.messagesData.push({id: v1(), message: body})
             return state
-        default: return state
+        default:
+            return state
     }
 }
 
