@@ -8,10 +8,10 @@ import {Route} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {ActionsTypes, StateType} from "./redux/state";
+import {ActionsTypes} from "./redux/state";
 
 type AppPropsType = {
-    appState: StateType
+    appStore: any
     dispatch: (action: ActionsTypes) => void
 
 }
@@ -26,12 +26,10 @@ function App(props: AppPropsType) {
 
                 <Header/>
                 <Navigation/>
-                {/*<Profile/>*/}
-
                 <div className="app-wrapper-content">
 
-                    <Route path={"/Profile"} render={() => <Profile dispatch={props.dispatch} state={props.appState.profilePage}/>}/>
-                    <Route path={"/Dialogs"} render={() => <Dialogs dispatch={props.dispatch} state={props.appState.dialogsProfile}/>}/>
+                    <Route path={"/Profile"} render={() => <Profile store={props.appStore}/>}/>
+                    <Route path={"/Dialogs"} render={() => <Dialogs store={props.appStore}/>}/>
                     <Route path={"/News"} render={() => <News/>}/>
                     <Route path={"/Music"} render={() => <Music/>}/>
                     <Route path={"/Settings"} render={() => <Settings/>}/>
