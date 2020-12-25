@@ -10,13 +10,13 @@ import Settings from "./components/Settings/Settings";
 import {ActionsTypes} from "./redux/state";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-type AppPropsType = {
-    appStore: any
-    dispatch: (action: ActionsTypes) => void
+// type AppPropsType = {
+//     appStore: any
+//     dispatch: (action: ActionsTypes) => void
+//
+// }
 
-}
-
-function App(props: AppPropsType) {
+function App() {
 
 
     return (
@@ -28,8 +28,8 @@ function App(props: AppPropsType) {
                 <Navigation/>
                 <div className="app-wrapper-content">
 
-                    <Route path={"/Profile"} render={() => <Profile store={props.appStore}/>}/>
-                    <Route path={"/Dialogs"} render={() => <DialogsContainer store={props.appStore}/>}/>
+                    <Route path={"/Profile"} render={() => <Profile />}/>
+                    <Route path={"/Dialogs"} render={() => <DialogsContainer />}/>
                     <Route path={"/News"} render={() => <News/>}/>
                     <Route path={"/Music"} render={() => <Music/>}/>
                     <Route path={"/Settings"} render={() => <Settings/>}/>
