@@ -13,7 +13,6 @@ let rerenderEntireTree =(state?: any) => {
         <BrowserRouter>
             <Provider store={store}>
             <App/>
-            <App/>
             </Provider>
         </BrowserRouter>, document.getElementById('root'));
 }

@@ -15,14 +15,12 @@ let initialState: DialogsPageType = {
     newMessageBody: ""
 }
 
-
 export const DialogsReducer = (state = initialState, action: { type: string, body?: string }) => {
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
             if (action.body) {
                 state.newMessageBody = action.body
-
             }
             return state
         case "SEND-MESSAGE":
