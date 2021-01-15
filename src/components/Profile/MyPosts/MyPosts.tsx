@@ -15,7 +15,6 @@ type MyPostsPropsType = {
 export function MyPosts(props: MyPostsPropsType) {
     let postsElements = props.postData.map(post => <Post message={post.message} likeCount={post.likesCount}
                                                          author={post.author} id={post.id}/>)
-
     const onAddPost = () => {
         props.onAddPost()
     }
@@ -23,7 +22,6 @@ export function MyPosts(props: MyPostsPropsType) {
     const changeTextAreaHandler = (e : ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewPostText(e.currentTarget.value)
     }
-
     return (
         <div className={mp.postBlock}>
             <h3>My posts</h3>

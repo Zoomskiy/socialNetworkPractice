@@ -1,6 +1,6 @@
-import {v1} from "uuid";
 import {DialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./DialogsReducer";
 import {AddPostAC, ProfileReducer, UpdateNewPostTextAC} from './ProfileReducer';
+import {v1} from "uuid";
 
 export type PostDataType = {
     id: string

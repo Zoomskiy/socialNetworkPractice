@@ -1,5 +1,5 @@
-import {v1} from "uuid";
 import {DialogsPageType} from "./state";
+import {v1} from "uuid";
 
 let initialState: DialogsPageType = {
     messagesData: [

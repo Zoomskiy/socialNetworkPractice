@@ -5,20 +5,19 @@ import Message from "./Message/Message";
 import {DialogsDataType, DialogsPageType, MessagesDataType} from "../../redux/state";
 
 type DialogsPropsType = {
-    SendMessage: () => void
+    sendMessage: () => void
     updateNewMessageBody: (body: string) => void
-    state: DialogsPageType
+    dialogsPage: DialogsPageType
 }
 
 
 function Dialogs(props: DialogsPropsType) {
-    let state = props.state
-    let dialogsElements = state.dialogsData.map((dialog: DialogsDataType) => <DialogItem name={dialog.name} id={dialog.id}/>)
-    let messagesElements = state.messagesData.map((message:MessagesDataType) => <Message message={message.message} id={message.id}/>)
-    let newMessageBody = state.newMessageBody
+    let dialogsElements = props.dialogsPage.dialogsData.map((dialog: DialogsDataType) => <DialogItem name={dialog.name} id={dialog.id}/>)
+    let messagesElements = props.dialogsPage.messagesData.map((message:MessagesDataType) => <Message message={message.message} id={message.id}/>)
+    let newMessageBody = props.dialogsPage.newMessageBody
 
     let onSendMessageClick = () => {
-        props.SendMessage()
+        props.sendMessage()
     }
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value
