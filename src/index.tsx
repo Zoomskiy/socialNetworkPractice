@@ -8,17 +8,11 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 
-let rerenderEntireTree = (state?: any) => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>, document.getElementById('root'));
-}
-
-rerenderEntireTree(store.getState())
-
-store.subscribe(rerenderEntireTree)
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>, document.getElementById('root'));
 
 reportWebVitals();

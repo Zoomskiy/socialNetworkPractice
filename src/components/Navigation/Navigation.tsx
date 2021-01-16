@@ -12,6 +12,9 @@ function Navigation() {
                 <NavLink to={"/Dialogs"} activeClassName={n.active}>Messages</NavLink>
             </div>
             <div className={n.item}>
+                <NavLink to={"/Users"} activeClassName={n.active}>Users</NavLink>
+            </div>
+            <div className={n.item}>
                 <NavLink to={"/News"} activeClassName={n.active}>News</NavLink>
             </div>
             <div className={n.item}>
@@ -20,6 +23,7 @@ function Navigation() {
             <div className={n.item}>
                 <NavLink to={"/Settings"} activeClassName={n.active}>Settings</NavLink>
             </div>
+
         </nav>
     )
 }
