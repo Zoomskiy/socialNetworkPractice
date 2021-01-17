@@ -7,11 +7,15 @@ type UsersLocationType = {
     country: string
     city: string
 }
+type UsersPhotoDataType = {
+    small: string
+    large: string
+}
 export type UsersDataType = {
     id: string
-    photo: string
+    photos: UsersPhotoDataType
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: UsersLocationType
 }
