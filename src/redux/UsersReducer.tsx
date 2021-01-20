@@ -70,6 +70,7 @@ export const usersReducer = (state = initialState, action: any) => {
     }
 }
 
+
 export const followAC = (userID: string) => {
     return {
         type: FOLLOW,

@@ -1,24 +1,22 @@
 import React from "react";
-import styles from "./users.module.css";
+import styles from "./users.module.css"
 import {UsersDataType} from "../../redux/UsersReducer";
-import userPhoto from "../../assets/images/user.png";
+import userPhoto from "../../assets/images/user.png"
+import axios from "axios";
 
-export let Users = (props: any) => {
-    let pagesCount: number = Math.ceil (props.totalUsersCount / props.pageSize)
-    let pages = []
-
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
+export let UsersOld = (props: any) => {
+    let getUsers = () => {
+        if (props.usersData.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                    props.setUsers(response.data.items)
+                })
+        }
     }
+
     return (
         <div>
-            <div>
-
-                {pages.map(it => {
-                    return  <span onClick={() => {props.onPageChanged(it) }} className={props.currentPage === it ? styles.selectedPage :""}>{it}</span>
-                })}
-            </div>
-
+            <button onClick={getUsers}>Get Users</button>
             {props.usersData.map((el: UsersDataType) => <div key={el.id}>
                 <span>
                     <div>

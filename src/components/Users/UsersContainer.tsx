@@ -7,8 +7,43 @@ import {
     unFollowAC,
     UsersDataType
 } from "../../redux/UsersReducer";
-import Users from "./UsersC";
 import {rootReducer} from "../../redux/redux-store";
+import React from "react";
+import axios from "axios";
+import {Users} from "./Users";
+
+class UsersAPIComponent extends React.Component<any, rootReducer> {
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
+    }
+
+    onPageChanged = (pageNumber  : number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
+    }
+
+
+    render() {
+        return<Users totalUsersCount ={this.props.totalUsersCount}
+                     pageSize = {this.props.pageSize}
+                     currentPage = {this.props.currentPage}
+                     onPageChanged = {this.onPageChanged}
+                     usersData = {this.props.usersData}
+                     follow = {this.props.follow}
+                     unfollow = {this.props.unfollow}
+
+        />
+    }
+}
+
 
 const mapStateToProps = (state: rootReducer) => {
     return {
@@ -39,4 +74,4 @@ const mapDispatchToProps = (dispatch: any) => {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
