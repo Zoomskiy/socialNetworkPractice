@@ -77,23 +77,23 @@ export const usersReducer = (state = initialState, action: ActionsTypes): UsersT
 
 
 
-type ActionsTypes = followACType | unFollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType | toogleIsFetchingACType;
+type ActionsTypes = followACType | unfollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType | toggleIsFetchingACType;
 type followACType = {
     type: typeof FOLLOW
     userID: string
 }
-export const followAC = (userID: string): followACType => {
+export const follow = (userID: string): followACType => {
     return {
         type: FOLLOW,
         userID
     } as const
 }
 
-type unFollowACType = {
+type unfollowACType = {
     type: typeof UNFOLLOW
     userID: string
 }
-export const unFollowAC = (userID: string): unFollowACType => {
+export const unfollow = (userID: string): unfollowACType => {
     return {
         type: UNFOLLOW,
         userID
@@ -104,7 +104,7 @@ type setUsersACType = {
     type: typeof SET_USERS
     usersData: Array<UsersDataType>
 }
-export const setUsersAC = (usersData: Array<UsersDataType>): setUsersACType => {
+export const setUsers = (usersData: Array<UsersDataType>): setUsersACType => {
     return {
         type: SET_USERS,
         usersData
@@ -115,7 +115,7 @@ type setCurrentPageACType = {
     type: typeof SET_CURRENT_PAGE
     currentPage: number
 }
-export const setCurrentPageAC = (currentPage: number): setCurrentPageACType => {
+export const setCurrentPage = (currentPage: number): setCurrentPageACType => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
@@ -126,18 +126,18 @@ type setTotalUsersCountACType = {
     type: typeof SET_TOTAL_USERS_COUNT
     totalUsersCount: number
 }
-export const setTotalUsersCountAC = (totalUsersCount: number): setTotalUsersCountACType => {
+export const setTotalUsersCount = (totalUsersCount: number): setTotalUsersCountACType => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalUsersCount
     } as const
 }
 
-type toogleIsFetchingACType = {
+type toggleIsFetchingACType = {
     type: typeof TOGGLE_IS_FETCHING
     isFetching: boolean
 }
-export const toggleIsFetchingAC = (isFetching: boolean): toogleIsFetchingACType => {
+export const toggleIsFetching = (isFetching: boolean): toggleIsFetchingACType => {
     return  {
         type: TOGGLE_IS_FETCHING,
         isFetching
