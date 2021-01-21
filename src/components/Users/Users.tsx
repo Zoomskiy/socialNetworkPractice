@@ -3,8 +3,20 @@ import styles from "./users.module.css";
 import {UsersDataType} from "../../redux/UsersReducer";
 import userPhoto from "../../assets/images/user.png";
 
-export let Users = (props: any) => {
-    let pagesCount: number = Math.ceil (props.totalUsersCount / props.pageSize)
+type UsersPropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+
+    usersData: Array<UsersDataType>
+
+    onPageChanged: (pageNumber: number) => void
+    follow: (userID: string) => void
+    unfollow: (userID: string) => void
+}
+
+export let Users = (props: UsersPropsType) => {
+    let pagesCount: number = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
 
     for (let i = 1; i <= pagesCount; i++) {
@@ -15,7 +27,10 @@ export let Users = (props: any) => {
             <div>
 
                 {pages.map(it => {
-                    return  <span onClick={() => {props.onPageChanged(it) }} className={props.currentPage === it ? styles.selectedPage :""}>{it}</span>
+                    return <span onClick={() => {
+                        props.onPageChanged(it)
+                    }}
+                                 className={props.currentPage === it ? styles.selectedPage : ""}>{it}</span>
                 })}
             </div>
 
