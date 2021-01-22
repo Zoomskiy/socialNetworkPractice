@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./users.module.css";
 import {UsersDataType} from "../../redux/UsersReducer";
 import userPhoto from "../../assets/images/user.png";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -19,7 +20,7 @@ export let Users = (props: UsersPropsType) => {
     let pagesCount: number = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
 
-    for (let i = 1; i <= pagesCount; i++) {
+    for(let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
     return (
@@ -37,8 +38,11 @@ export let Users = (props: UsersPropsType) => {
             {props.usersData.map((el: UsersDataType) => <div key={el.id}>
                 <span>
                     <div>
-                        <img src={el.photos.small != null ? el.photos.small : userPhoto} alt={"user Avatar"}
-                             className={styles.userPhoto}/>
+                        <NavLink to={"/Profile/" + el.id}>
+                            <img src={el.photos.small != null ? el.photos.small : userPhoto} alt={"user Avatar"}
+                                 className={styles.userPhoto}/>
+                        </NavLink>
+
                     </div>
                     <div>
                         {el.followed ? <button onClick={() => {

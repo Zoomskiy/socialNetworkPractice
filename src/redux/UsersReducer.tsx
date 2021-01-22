@@ -1,3 +1,5 @@
+import {ActionsTypesForProject} from "./ActionsTypesForProject";
+
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
@@ -38,7 +40,7 @@ const initialState: UsersType = {
 
 }
 
-export const usersReducer = (state = initialState, action: ActionsTypes): UsersType => {
+export const usersReducer = (state = initialState, action: ActionsTypesForProject): UsersType => {
 
     switch (action.type) {
         case FOLLOW:
@@ -77,7 +79,6 @@ export const usersReducer = (state = initialState, action: ActionsTypes): UsersT
 
 
 
-type ActionsTypes = followACType | unfollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType | toggleIsFetchingACType;
 type followACType = {
     type: typeof FOLLOW
     userID: string

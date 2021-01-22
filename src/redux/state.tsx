@@ -1,6 +1,7 @@
-import {DialogsReducer, SendMessageAC, UpdateNewMessageBodyAC} from "./DialogsReducer";
-import {AddPostAC, ProfileReducer, UpdateNewPostTextAC} from './ProfileReducer';
+import {DialogsReducer} from "./DialogsReducer";
+import { ProfileReducer}   from './ProfileReducer';
 import {v1} from "uuid";
+import {ActionsTypesForProject} from "./ActionsTypesForProject";
 
 export type PostDataType = {
     id: string
@@ -19,6 +20,7 @@ export type MessagesDataType = {
 export type ProfilePageType = {
     messageForNewPost: string
     postData: Array<PostDataType>
+    profile: any
 }
 export type DialogsPageType = {
     messagesData: Array<MessagesDataType>
@@ -34,10 +36,9 @@ export type StoreType = {
     getState: () => StateType
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: ActionsTypesForProject) => void
 }
 
-export type ActionsTypes = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdateNewPostTextAC> | ReturnType<typeof SendMessageAC> | ReturnType<typeof UpdateNewMessageBodyAC>
 
 let store: StoreType = {
     _state: {
@@ -54,7 +55,8 @@ let store: StoreType = {
                 {id: v1(), message: "To go over everything", likesCount: 3, author: "Alex"},
                 {id: v1(), message: "They say that time's supposed to heal ya", likesCount: 150, author: "Alex"},
                 {id: v1(), message: "But I ain't done much healing", likesCount: 2000, author: "Alex"},
-            ]
+            ],
+            profile: {}
         },
         dialogsProfile: {
             messagesData: [
