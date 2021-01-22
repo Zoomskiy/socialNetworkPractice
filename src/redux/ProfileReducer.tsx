@@ -21,7 +21,27 @@ const initialState: ProfilePageType = {
         {id: v1(), message: "They say that time's supposed to heal ya", likesCount: 150, author: "Alex"},
         {id: v1(), message: "But I ain't done much healing", likesCount: 2000, author: "Alex"},
     ],
-    profile: null
+    profile: {
+            aboutMe: "",
+            contacts: {
+                facebook:  null,
+                website:  null,
+                vk: `https://vk.com/id157339675`,
+                twitter:  null,
+                instagram: null,
+                youtube:  null,
+                github: `https://github.com/Zoomskiy?tab=overview&from=2021-01-01&to=2021-01-22`,
+                mainLink:  null
+            },
+            lookingForAJob: true,
+            lookingForAJobDescription: "looking for my first job as Frontend programmer",
+            fullName: "Alexander Sindetckiy",
+            userId: 13689,
+            photos: {
+                small: undefined,
+                large: undefined
+            }
+        }
 }
 
 export const ProfileReducer = (state = initialState, action: ActionsTypesForProject) => {

@@ -4,6 +4,7 @@ import {rootReducer} from "../../redux/redux-store";
 import axios from "axios";
 import {connect} from "react-redux";
 import { setUserProfile} from "../../redux/ProfileReducer";
+import {RouteComponentProps, withRouter } from "react-router-dom";
 
 export type allDataProfileTypes = {
     aboutMe:string,
@@ -22,21 +23,30 @@ export type allDataProfileTypes = {
     fullName: string,
     userId: number,
     photos: {
-        small: string,
-        large: string
+        small: string | undefined,
+        large: string | undefined
     }
 
 }
 
-type ProfileContainerPropsType = {
-    setUserProfile: (profile: allDataProfileTypes) => void
+type PathParamsType = {
+    userId: string
+}
+type MapStateProps = {
     profile: allDataProfileTypes
 }
+type MapDispatchPropsType = {
+    setUserProfile : (profile: allDataProfileTypes) => void
+}
+type OwnPropsType = MapStateProps & MapDispatchPropsType
+type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-class ProfileContainer extends React.Component<ProfileContainerPropsType,rootReducer>{
+class ProfileContainer extends React.Component<PropsType,rootReducer>{
 
     componentDidMount (): void {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        let userId = this.props.match.params.userId
+        if(!userId){userId = "13689"}
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
                 this.props.setUserProfile(response.data)
             })
@@ -51,10 +61,10 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType,rootRed
     }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: rootReducer): MapStateProps  => ({
     profile: state.profilePage.profile
 })
 
+let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-
-export default connect(mapStateToProps, {setUserProfile})(ProfileContainer)
+export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)

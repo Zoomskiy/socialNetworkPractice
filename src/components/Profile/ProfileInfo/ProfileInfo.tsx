@@ -1,9 +1,14 @@
 import React from "react";
 import p from "./ProfileInfo.module.css"
 import {Preloader} from "../../../common/preloader/Preloader";
+import {allDataProfileTypes} from "../ProfileContainer";
 
-function ProfileInfo(props: any) {
-    if(!props.profile){
+type ProfileInfoPropsType = {
+    profile: allDataProfileTypes
+}
+
+function ProfileInfo (props: ProfileInfoPropsType) {
+    if(!props.profile) {
         return <Preloader/>
     }
     return (
@@ -15,7 +20,18 @@ function ProfileInfo(props: any) {
             </div>
             <div className={p.descriptionBlock}>
                 <img alt={"img smt"} src={props.profile.photos.large}/>
-                ava
+                <div>
+                    {props.profile.aboutMe}
+                </div>
+                <div>
+                    {props.profile.fullName}
+                </div>
+                <div>
+                    {props.profile.lookingForAJob}
+                </div>
+                <div>
+                    {props.profile.contacts.github}
+                </div>
             </div>
         </div>
     )

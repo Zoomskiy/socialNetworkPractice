@@ -16,7 +16,7 @@ function App() {
                 <Header/>
                 <Navigation/>
                 <div className="app-wrapper-content">
-                    <Route path={"/Profile"} render={() => <ProfileContainer />}/>
+                    <Route path={"/Profile/:userId?"} render={() => <ProfileContainer />}/>
                     <Route path={"/Dialogs"} render={() => <DialogsContainer />}/>
                     <Route  path={"/Users"} render={() => <UsersContainer />}/>
                     <Route path={"/News"} render={() => <News/>}/>
