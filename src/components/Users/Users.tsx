@@ -3,6 +3,7 @@ import styles from "./users.module.css";
 import {UsersDataType} from "../../redux/UsersReducer";
 import userPhoto from "../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -46,9 +47,30 @@ export let Users = (props: UsersPropsType) => {
                     </div>
                     <div>
                         {el.followed ? <button onClick={() => {
-                            props.unfollow(el.id)
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,
+                                {
+                                    withCredentials: true,
+                                    headers: {
+                                    "API-KEY": "183fd219-3d1a-4835-afb7-a454835dc3c5"
+                                    }})
+                                .then(response => {
+                                    if(response.data.resultCode === 0) {
+                                        props.unfollow(el.id)
+                                    }
+                                })
                         }}>Unfollow</button> : <button onClick={() => {
-                            props.follow(el.id)
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {},
+                                {
+                                    withCredentials: true,
+                                    headers: {
+                                        "API-KEY": "183fd219-3d1a-4835-afb7-a454835dc3c5"
+
+                                    }})
+                                .then(response => {
+                                    if(response.data.resultCode === 0) {
+                                        props.follow(el.id)
+                                    }
+                                })
                         }}>Follow</button>}
                     </div>
                 </span>
