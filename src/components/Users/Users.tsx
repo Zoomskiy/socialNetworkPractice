@@ -51,8 +51,9 @@ export let Users = (props: UsersPropsType) => {
                                 {
                                     withCredentials: true,
                                     headers: {
-                                    "API-KEY": "183fd219-3d1a-4835-afb7-a454835dc3c5"
-                                    }})
+                                        "API-KEY": "183fd219-3d1a-4835-afb7-a454835dc3c5"
+                                    }
+                                })
                                 .then(response => {
                                     if(response.data.resultCode === 0) {
                                         props.unfollow(el.id)
@@ -65,7 +66,8 @@ export let Users = (props: UsersPropsType) => {
                                     headers: {
                                         "API-KEY": "183fd219-3d1a-4835-afb7-a454835dc3c5"
 
-                                    }})
+                                    }
+                                })
                                 .then(response => {
                                     if(response.data.resultCode === 0) {
                                         props.follow(el.id)
