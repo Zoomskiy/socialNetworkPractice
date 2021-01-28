@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import mp from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {PostDataType } from "../../../redux/state";
@@ -12,14 +12,14 @@ type MyPostsPropsType = {
 
 
 
-export function MyPosts(props: MyPostsPropsType) {
+export const MyPosts = React.memo( (props: MyPostsPropsType) => {
     let postsElements = props.postData.map(post => <Post message={post.message} likeCount={post.likesCount}
                                                          author={post.author} id={post.id}/>)
-    const onAddPost = () => {
+    const onAddPost =  () => {
         props.onAddPost()
     }
 
-    const changeTextAreaHandler = (e : ChangeEvent<HTMLTextAreaElement>) => {
+    const changeTextAreaHandler =  (e : ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewPostText(e.currentTarget.value)
     }
     return (
@@ -40,6 +40,6 @@ export function MyPosts(props: MyPostsPropsType) {
 
         </div>
     )
-}
+})
 
 

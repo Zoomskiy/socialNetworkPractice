@@ -2,7 +2,7 @@ import React from "react";
 import n from "./Navigation.module.css"
 import {NavLink} from "react-router-dom";
 
-function Navigation() {
+const Navigation = React.memo(() => {
     return (
         <nav className={n.nav}>
             <div className={n.item}>
@@ -26,6 +26,6 @@ function Navigation() {
 
         </nav>
     )
-}
+})
 
 export default Navigation

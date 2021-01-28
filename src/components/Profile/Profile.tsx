@@ -8,13 +8,13 @@ type ProfilePropsType = {
 }
 
 
-function Profile(props: ProfilePropsType) {
+const Profile = React.memo((props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo profile={props.profile}/>
-            <MyPostsContainer />
+            <MyPostsContainer/>
         </div>
     )
-}
+})
 
 export default Profile

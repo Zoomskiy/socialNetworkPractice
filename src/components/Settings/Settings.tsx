@@ -1,12 +1,12 @@
 import React from "react";
 
 
-function Settings() {
+const Settings = React.memo(() => {
     return(
         <div>
             Settings
         </div>
     )
-}
+})
 
 export default Settings

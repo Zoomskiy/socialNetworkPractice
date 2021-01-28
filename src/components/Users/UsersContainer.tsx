@@ -3,7 +3,7 @@ import {
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleIsFetching,
+    setUsers, toggleFollowingProgress, toggleIsFetching,
     unfollow,
     UsersDataType
 } from "../../redux/UsersReducer";
@@ -24,6 +24,8 @@ type UsersAPIComponentPropsType = {
 
     follow: (userdID: string) => void
     unfollow: (userdID: string) => void
+    toggleFollowingProgress: (isFetcing: boolean, userId: string) => void
+    followingInProgress: Array<any>
 
     usersData: Array<UsersDataType>
     setUsers: (usersData: Array<UsersDataType>) => void
@@ -36,19 +38,19 @@ class UsersAPIComponent extends React.Component<UsersAPIComponentPropsType, root
     componentDidMount () {
         this.props.toggleIsFetching(true)
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-            })
+            this.props.toggleIsFetching(false)
+            this.props.setUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
+        })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
         usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            })
+            this.props.toggleIsFetching(false)
+            this.props.setUsers(data.items)
+        })
     }
 
     render () {
@@ -61,6 +63,8 @@ class UsersAPIComponent extends React.Component<UsersAPIComponentPropsType, root
                    usersData={this.props.usersData}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
+                   followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -72,7 +76,8 @@ const mapStateToProps = (state: rootReducer) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -82,6 +87,7 @@ export default connect(mapStateToProps, {
         setUsers,
         setCurrentPage,
         setTotalUsersCount,
-        toggleIsFetching
+        toggleIsFetching,
+    toggleFollowingProgress
     }
 )(UsersAPIComponent)

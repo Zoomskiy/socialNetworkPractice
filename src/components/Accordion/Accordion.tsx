@@ -5,7 +5,7 @@ type AccordionPropsType = {
     collapsed: boolean
 }
 
-function Accordion(props: AccordionPropsType) {
+const Accordion = React.memo((props: AccordionPropsType) => {
     if(props.collapsed === false) {
         return (
             <div>
@@ -19,21 +19,21 @@ function Accordion(props: AccordionPropsType) {
                 <AccordionTitle title={props.title}/>
             </div>)
     }
-}
+})
 
 type AccordionTitlePropsType = {
     title: string
 }
 
-function AccordionTitle(props: AccordionTitlePropsType) {
+const AccordionTitle = React.memo((props: AccordionTitlePropsType) => {
     return (
         <div>
             <h3>{props.title}</h3>
         </div>
     )
-}
+})
 
-function AccordionBody() {
+const AccordionBody = React.memo(() => {
     return (
         <div>
             <ul>
@@ -43,5 +43,5 @@ function AccordionBody() {
             </ul>
         </div>
     )
-}
+})
 export default Accordion;

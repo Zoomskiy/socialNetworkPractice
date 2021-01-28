@@ -11,7 +11,7 @@ type DialogsPropsType = {
 }
 
 
-function Dialogs(props: DialogsPropsType) {
+const Dialogs = React.memo( (props: DialogsPropsType)=> {
     let dialogsElements = props.dialogsPage.dialogsData.map((dialog: DialogsDataType) => <DialogItem name={dialog.name} id={dialog.id}/>)
     let messagesElements = props.dialogsPage.messagesData.map((message:MessagesDataType) => <Message message={message.message} id={message.id}/>)
     let newMessageBody = props.dialogsPage.newMessageBody
@@ -38,6 +38,6 @@ function Dialogs(props: DialogsPropsType) {
             </div>
         </div>
     )
-}
+}, )
 
 export default Dialogs

@@ -7,7 +7,7 @@ type ProfileInfoPropsType = {
     profile: allDataProfileTypes
 }
 
-function ProfileInfo (props: ProfileInfoPropsType) {
+const ProfileInfo = React.memo( (props: ProfileInfoPropsType) =>{
     if(!props.profile) {
         return <Preloader/>
     }
@@ -35,6 +35,6 @@ function ProfileInfo (props: ProfileInfoPropsType) {
             </div>
         </div>
     )
-}
+})
 
 export default ProfileInfo
