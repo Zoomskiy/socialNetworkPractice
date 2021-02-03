@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback} from "react";
+import React, {ChangeEvent} from "react";
 import mp from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {PostDataType } from "../../../redux/state";

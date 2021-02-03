@@ -2,6 +2,7 @@ import {AddPost, UpdateNewPostText} from "../../../redux/ProfileReducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {StateType} from "../../../redux/state";
+import {Dispatch} from "redux";
 
 
 const mapStateToProps = (state: StateType) => {
@@ -10,7 +11,7 @@ const mapStateToProps = (state: StateType) => {
         message: state.profilePage.messageForNewPost
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         updateNewPostText: (text: string) => {
             dispatch(UpdateNewPostText(text))
