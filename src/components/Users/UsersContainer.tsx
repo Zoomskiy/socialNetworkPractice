@@ -1,9 +1,9 @@
 import {connect} from "react-redux";
 import {
     follow,
-    followSuccess, getUsers,
-    setCurrentPage, unfollow,
-    unfollowSuccess,
+    getUsers,
+    setCurrentPage,
+    unfollow,
     UsersDataType
 } from "../../redux/UsersReducer";
 import {rootReducer} from "../../redux/redux-store";

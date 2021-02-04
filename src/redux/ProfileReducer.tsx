@@ -2,6 +2,7 @@ import {v1} from "uuid";
 import {PostDataType, ProfilePageType} from "./state";
 import {ActionsTypesForProject} from "./ActionsTypesForProject";
 import {allDataProfileTypes} from "../components/Profile/ProfileContainer";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = "ADD_POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
@@ -94,4 +95,10 @@ export const setUserProfile = (profile: allDataProfileTypes): setUserProfileACTy
     return {
         type: SET_USER_PROFILE, profile
     } as const
+}
+export const getUserProfile = (userId: string) => (dispatch: any) => {
+    usersAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response.data))
+        })
 }
