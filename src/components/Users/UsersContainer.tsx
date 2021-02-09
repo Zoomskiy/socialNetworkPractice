@@ -10,6 +10,7 @@ import {rootReducer} from "../../redux/redux-store";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../../common/preloader/Preloader";
+import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 
 type UsersAPIComponentPropsType = {
     totalUsersCount: number
@@ -66,10 +67,12 @@ const mapStateToProps = (state: rootReducer) => {
     }
 }
 
+const UsersRedirectComponent = withAuthRedirect(UsersAPIComponent)
+
 export default connect(mapStateToProps, {
         follow,
         unfollow,
         setCurrentPage,
-    getUsers
+        getUsers
     }
-)(UsersAPIComponent)
+)(UsersRedirectComponent)
