@@ -25,7 +25,6 @@ const Dialogs = React.memo( (props: DialogsPropsType)=> {
         props.updateNewMessageBody(body)
     }
 
-
     return (
         <div className={d.dialogs}>
             <div className={d.dialogsItems}>

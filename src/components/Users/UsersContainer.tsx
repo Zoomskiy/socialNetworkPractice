@@ -11,6 +11,7 @@ import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../../common/preloader/Preloader";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
+import {compose} from "redux";
 
 type UsersAPIComponentPropsType = {
     totalUsersCount: number
@@ -66,13 +67,13 @@ const mapStateToProps = (state: rootReducer) => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
-
-const UsersRedirectComponent = withAuthRedirect(UsersAPIComponent)
-
-export default connect(mapStateToProps, {
-        follow,
-        unfollow,
-        setCurrentPage,
-        getUsers
-    }
-)(UsersRedirectComponent)
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+connect(mapStateToProps, {
+            follow,
+            unfollow,
+            setCurrentPage,
+            getUsers
+        }
+    )
+)(UsersAPIComponent)
