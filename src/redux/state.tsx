@@ -20,6 +20,7 @@ export type ProfilePageType = {
     messageForNewPost: string
     postData: Array<PostDataType>
     profile: allDataProfileTypes
+    status: string
 }
 export type DialogsPageType = {
     messagesData: Array<MessagesDataType>

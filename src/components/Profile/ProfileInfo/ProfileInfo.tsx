@@ -6,6 +6,8 @@ import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile: allDataProfileTypes
+    status: string
+    updateStatus: (status: string) => void
 }
 
 const ProfileInfo = React.memo( (props: ProfileInfoPropsType) =>{
@@ -21,7 +23,7 @@ const ProfileInfo = React.memo( (props: ProfileInfoPropsType) =>{
             {/*</div>*/}
             <div className={p.descriptionBlock}>
                 <img alt={"img smt"} src={props.profile.photos.large}/>
-                <ProfileStatus status={"My profile hi"} value={""}/>
+                <ProfileStatus status={props.status} value={""} updateStatus={props.updateStatus}/>
                 <div>
                     {props.profile.aboutMe}
                 </div>

@@ -1,4 +1,4 @@
-import {AddPost, setUserProfile, UpdateNewPostText} from "./ProfileReducer";
+import {AddPost, setStatus, setUserProfile, UpdateNewPostText} from "./ProfileReducer";
 import {SendMessage, UpdateNewMessageBody} from "./DialogsReducer";
 import {
     followSuccess,
@@ -18,3 +18,4 @@ export type ActionsTypesForProject = ReturnType<typeof AddPost> | ReturnType<typ
     | ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching> | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setStatus>
