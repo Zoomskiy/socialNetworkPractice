@@ -39,13 +39,13 @@ const initialState: ProfilePageType = {
             lookingForAJob: true,
             lookingForAJobDescription: "looking for my first job as Frontend programmer",
             fullName: "Alexander Sindetckiy",
-            userId: 13689,
+            userId: "13689",
             photos: {
                 small: undefined,
                 large: undefined
             }
         },
-    status: ""
+    status: "Sa"
 }
 
 export const ProfileReducer = (state = initialState, action: ActionsTypesForProject) => {
@@ -124,6 +124,7 @@ export const getStatus = (userId: string) => (dispatch: Dispatch) => {
         })
 }
 export const updateStatus = (status: string) => (dispatch: Dispatch) => {
+    debugger
     profileAPI.updateStatus(status)
         .then(response => {
             if(response.data.resultCode === 0) {

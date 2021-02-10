@@ -1,5 +1,6 @@
 import {ActionsTypesForProject} from "./ActionsTypesForProject";
 import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -178,7 +179,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
     }
 }
 export const follow = (userId: string) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgress(true, userId))
         usersAPI.follow(userId)
             .then(response => {
@@ -190,7 +191,7 @@ export const follow = (userId: string) => {
     }
 }
 export const unfollow = (userId: string) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgress(true, userId))
         usersAPI.unfollow(userId)
             .then(response => {

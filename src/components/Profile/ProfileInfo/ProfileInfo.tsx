@@ -23,7 +23,7 @@ const ProfileInfo = React.memo( (props: ProfileInfoPropsType) =>{
             {/*</div>*/}
             <div className={p.descriptionBlock}>
                 <img alt={"img smt"} src={props.profile.photos.large}/>
-                <ProfileStatus status={props.status} value={""} updateStatus={props.updateStatus}/>
+                <ProfileStatus status={props.status} value={props.status} updateStatus={props.updateStatus}/>
                 <div>
                     {props.profile.aboutMe}
                 </div>

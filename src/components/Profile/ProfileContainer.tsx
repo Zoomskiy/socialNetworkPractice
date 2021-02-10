@@ -22,7 +22,7 @@ export type allDataProfileTypes = {
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
-    userId: number,
+    userId: string,
     photos: {
         small: string | undefined,
         large: string | undefined
@@ -40,8 +40,10 @@ type MapStateProps = {
 type MapDispatchPropsType = {
     getUserProfile: (userId: string)  => void
     getStatus: (userId: string) => void
+    updateStatus: (status: string) => void
 }
 type OwnPropsType = MapStateProps & MapDispatchPropsType
+// @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 class ProfileContainer extends React.Component<PropsType,rootReducer>{
