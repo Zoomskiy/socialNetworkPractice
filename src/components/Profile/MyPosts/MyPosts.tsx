@@ -35,7 +35,7 @@ const AddNewPostForm = (props: any) => {
     return(
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name="newPostText"/>
+                <Field name="newPostText" component="textarea"/>
             </div>
             <div>
                 <button >Add post</button>
