@@ -1,13 +1,13 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import mp from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {PostDataType } from "../../../redux/state";
+import  {reduxForm,Field} from "redux-form";
 
 type MyPostsPropsType = {
     message: string
     postData: Array<PostDataType>
-    updateNewPostText: (text: string) => void
-    onAddPost: () => void
+    onAddPost: (values: any) => void
 }
 
 
@@ -15,25 +15,14 @@ type MyPostsPropsType = {
 export const MyPosts = React.memo( (props: MyPostsPropsType) => {
     let postsElements = props.postData.map(post => <Post message={post.message} likeCount={post.likesCount}
                                                          author={post.author} id={post.id}/>)
-    const onAddPost =  () => {
-        props.onAddPost()
+    const onAddPost =  (values: any) => {
+        props.onAddPost(values.newPostText)
     }
 
-    const changeTextAreaHandler =  (e : ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
-    }
     return (
         <div className={mp.postBlock}>
             <h3>My posts</h3>
-            <div>
-                <div>
-                    <textarea value={props.message} onChange={changeTextAreaHandler}/>
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-
-            </div>
+            <ProfileAddNewPostForm onSubmit={onAddPost}/>
             <div className={mp.posts}>
                 {postsElements}
             </div>
@@ -42,4 +31,17 @@ export const MyPosts = React.memo( (props: MyPostsPropsType) => {
     )
 })
 
+const AddNewPostForm = (props: any) => {
+    return(
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field name="newPostText"/>
+            </div>
+            <div>
+                <button >Add post</button>
+            </div>
 
+        </form>
+    )
+}
+const ProfileAddNewPostForm = reduxForm({form: "ProfileAddNewPostForm"})(AddNewPostForm)

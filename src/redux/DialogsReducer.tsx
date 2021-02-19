@@ -3,7 +3,6 @@ import {v1} from "uuid";
 import {ActionsTypesForProject} from "./ActionsTypesForProject";
 
 const SEND_MESSAGE = "SEND_MESSAGE"
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY"
 
 let initialState: DialogsPageType = {
     messagesData: [
@@ -23,18 +22,11 @@ export const DialogsReducer = (state = initialState, action: ActionsTypesForProj
     let stateCopy = {...state}
     switch (action.type) {
 
-        case UPDATE_NEW_MESSAGE_BODY: {
-            if(action.body) {
-                stateCopy = {...state, newMessageBody: action.body}
-            }
-            return stateCopy
-        }
         case SEND_MESSAGE:
-            let body = state.newMessageBody
+            let body = action.newMessageBody
              stateCopy = {
                 ...state,
                 messagesData: [...state.messagesData, {id: v1(), message: body}],
-                newMessageBody: ""
             }
             return stateCopy
         default:
@@ -44,19 +36,11 @@ export const DialogsReducer = (state = initialState, action: ActionsTypesForProj
 
 type SendMessageACType = {
     type: typeof SEND_MESSAGE
+    newMessageBody: string
 }
-export const SendMessage = (): SendMessageACType => {
+export const SendMessage = (newMessageBody: string): SendMessageACType => {
     return {
-        type: SEND_MESSAGE
-    } as const
-}
-
-type UpdateNewMessageBodyACType = {
-    type: typeof UPDATE_NEW_MESSAGE_BODY, body: string
-
-}
-export const UpdateNewMessageBody = (body: string): UpdateNewMessageBodyACType => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,  body
+        type: SEND_MESSAGE,
+        newMessageBody
     } as const
 }
