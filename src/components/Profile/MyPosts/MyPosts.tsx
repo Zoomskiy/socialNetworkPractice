@@ -3,6 +3,8 @@ import mp from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {PostDataType } from "../../../redux/state";
 import  {reduxForm,Field} from "redux-form";
+import {maxLengthCreator, requiredField} from "../../../utils/validator/validators";
+import {TextArea} from "../../../common/FormsControl/FormsControl";
 
 type MyPostsPropsType = {
     message: string
@@ -10,7 +12,7 @@ type MyPostsPropsType = {
     onAddPost: (values: any) => void
 }
 
-
+const maxLength10 = maxLengthCreator(10)
 
 export const MyPosts = React.memo( (props: MyPostsPropsType) => {
     let postsElements = props.postData.map(post => <Post message={post.message} likeCount={post.likesCount}
@@ -35,7 +37,7 @@ const AddNewPostForm = (props: any) => {
     return(
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name="newPostText" component="textarea"/>
+                <Field name="newPostText" component={TextArea} validate={[requiredField, maxLength10]} placeholder="Hellp"/>
             </div>
             <div>
                 <button >Add post</button>
