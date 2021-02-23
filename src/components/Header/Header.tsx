@@ -9,8 +9,9 @@ function Header(props: any) {
             <div>
                 <img className={h.image} src="https://gtswiki.gt-beginners.net/decal/png/76/97/17/4764909565327179776_1.png" alt=""/>
                 <div className={h.loginBlock}>
-                    {props.isAuth ? props.login :
-                    <NavLink to={"/Login"}>Login</NavLink> }
+                    {props.isAuth
+                        ? <div>{props.login} - <button onClick={props.logout}>Logout</button> </div>
+                        : <NavLink to={"/Login"}>Login</NavLink> }
                 </div>
             </div>
 
