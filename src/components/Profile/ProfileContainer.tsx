@@ -36,6 +36,8 @@ type PathParamsType = {
 type MapStateProps = {
     profile: allDataProfileTypes
     status: string
+    authorizeUserId: number | null
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
     getUserProfile: (userId: string) => void
@@ -68,7 +70,9 @@ class ProfileContainer extends React.Component<PropsType, rootReducer> {
 
 const mapStateToProps = (state: rootReducer): MapStateProps => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizeUserId: state.auth.id,
+    isAuth: state.auth.isAuth
 })
 
 
