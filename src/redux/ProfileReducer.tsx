@@ -38,7 +38,7 @@ const initialState: ProfilePageType = {
             lookingForAJob: true,
             lookingForAJobDescription: "looking for my first job as Frontend programmer",
             fullName: "Alexander Sindetckiy",
-            userId: "13689",
+        userId: "13689",
             photos: {
                 small: undefined,
                 large: undefined
@@ -100,8 +100,8 @@ export const setStatus = (status: string): setStatusACType => {
         type: SET_STATUS, status
     } as const
 }
-export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
-    usersAPI.getProfile(userId)
+export const getUserProfile = (id: string) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(id)
         .then(response => {
             dispatch(setUserProfile(response.data))
         })

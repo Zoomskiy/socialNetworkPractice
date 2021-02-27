@@ -10,7 +10,6 @@ import {rootReducer} from "../../redux/redux-store";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../../common/preloader/Preloader";
-import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 import {compose} from "redux";
 
 type UsersAPIComponentPropsType = {
@@ -68,7 +67,6 @@ const mapStateToProps = (state: rootReducer) => {
     }
 }
 export default compose<React.ComponentType>(
-    withAuthRedirect,
 connect(mapStateToProps, {
             follow,
             unfollow,
