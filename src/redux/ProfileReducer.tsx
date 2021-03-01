@@ -48,7 +48,6 @@ const initialState: ProfilePageType = {
 }
 
 export const ProfileReducer = (state = initialState, action: ActionsTypesForProject) => {
-
     switch (action.type) {
         case ADD_POST : {
             let newPost: PostDataType = {
