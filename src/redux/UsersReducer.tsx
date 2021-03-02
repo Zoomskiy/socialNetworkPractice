@@ -167,9 +167,10 @@ export const toggleIsFetching = (isFetching: boolean): toggleIsFetchingACType =>
     } as const
 }
 
-export const getUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
+export const requestUsers = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
+        dispatch(setCurrentPage(currentPage))
 
         usersAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetching(false))
